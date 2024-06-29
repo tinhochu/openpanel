@@ -89,35 +89,45 @@ const startServer = async () => {
       reply.send({ name: 'openpanel sdk api' });
     });
     fastify.get('/healthcheck', async (request, reply) => {
-      try {
-        const redisRes = await withTimings(redis.keys('*'));
-        const dbRes = await withTimings(db.project.findFirst());
-        const queueRes = await withTimings(eventsQueue.getCompleted());
-        const chRes = await withTimings(
-          chQuery('SELECT * FROM events LIMIT 1')
-        );
+      const redisRes = await withTimings(redis.keys('*')).catch(
+        (e: Error) => e
+      );
+      const dbRes = await withTimings(db.project.findFirst()).catch(
+        (e: Error) => e
+      );
+      const queueRes = await withTimings(eventsQueue.getCompleted()).catch(
+        (e: Error) => e
+      );
+      const chRes = await withTimings(
+        chQuery('SELECT * FROM events LIMIT 1')
+      ).catch((e: Error) => e);
 
-        reply.send({
-          redis: {
-            ok: redisRes[1].length ? true : false,
-            time: `${redisRes[0]}ms`,
-          },
-          db: {
-            ok: dbRes[1] ? true : false,
-            time: `${dbRes[0]}ms`,
-          },
-          queue: {
-            ok: queueRes[1].length ? true : false,
-            time: `${queueRes[0]}ms`,
-          },
-          ch: {
-            ok: chRes[1].length ? true : false,
-            time: `${chRes[0]}ms`,
-          },
-        });
-      } catch (e) {
-        reply.status(500).send();
-      }
+      reply.send({
+        redis: Array.isArray(redisRes)
+          ? {
+              ok: redisRes[1].length ? true : false,
+              time: `${redisRes[0]}ms`,
+            }
+          : redisRes,
+        db: Array.isArray(dbRes)
+          ? {
+              ok: dbRes[1] ? true : false,
+              time: `${dbRes[0]}ms`,
+            }
+          : dbRes,
+        queue: Array.isArray(queueRes)
+          ? {
+              ok: queueRes[1].length ? true : false,
+              time: `${queueRes[0]}ms`,
+            }
+          : queueRes,
+        ch: Array.isArray(chRes)
+          ? {
+              ok: chRes[1].length ? true : false,
+              time: `${chRes[0]}ms`,
+            }
+          : chRes,
+      });
     });
     if (process.env.NODE_ENV === 'production') {
       for (const signal of ['SIGINT', 'SIGTERM']) {

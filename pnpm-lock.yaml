@@ -189,6 +189,9 @@ importers:
       '@openpanel/validation':
         specifier: workspace:^
         version: link:../../packages/validation
+      '@prisma/nextjs-monorepo-workaround-plugin':
+        specifier: ^5.12.1
+        version: 5.16.1
       '@radix-ui/react-accordion':
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.2.19)(@types/react@18.2.56)(react-dom@18.2.0)(react@18.2.0)
@@ -445,9 +448,6 @@ importers:
       '@openpanel/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@prisma/nextjs-monorepo-workaround-plugin':
-        specifier: ^5.12.1
-        version: 5.12.1
       '@types/bcrypt':
         specifier: ^5.0.2
         version: 5.0.2
@@ -747,6 +747,9 @@ importers:
       pino:
         specifier: ^8.17.2
         version: 8.19.0
+      pino-pretty:
+        specifier: ^10.3.1
+        version: 10.3.1
       ramda:
         specifier: ^0.29.1
         version: 0.29.1
@@ -5237,9 +5240,9 @@ packages:
     dependencies:
       '@prisma/debug': 5.9.1
 
-  /@prisma/nextjs-monorepo-workaround-plugin@5.12.1:
-    resolution: {integrity: sha512-ISYeAIY2x8riGhpgDqlupqqkqgJe2ksQm4yVH01afQ/7hp7fjPLcEXbDjEYuuloXJgnbvkcN6GXcD3v5hiq85A==}
-    dev: true
+  /@prisma/nextjs-monorepo-workaround-plugin@5.16.1:
+    resolution: {integrity: sha512-uX2nFUt1+qDU6za4lU6vFu6Ww2dD6XnQ3TLu3Eo4eVKhpa8h6qLbYiA5F9Y0yCOxutw12hA/eFU9TEOAa9Zgfg==}
+    dev: false
 
   /@protobufjs/aspromise@1.1.2:
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}

@@ -3,6 +3,8 @@ import { pathOr } from 'ramda';
 
 import { AccessLevel, db } from '@openpanel/db';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   const payload: WebhookEvent = await request.json();
 
