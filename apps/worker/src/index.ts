@@ -29,6 +29,10 @@ async function start() {
   createBullBoard({
     queues: [new BullMQAdapter(eventsQueue), new BullMQAdapter(cronQueue)],
     serverAdapter: serverAdapter,
+    options: {
+      uiConfig: {},
+      uiBasePath: '/worker',
+    },
   });
 
   app.use('/', serverAdapter.getRouter());
