@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS openpanel;
+
 CREATE TABLE IF NOT EXISTS openpanel.events (
   `id` UUID DEFAULT generateUUIDv4(),
   `name` String,
