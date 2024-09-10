@@ -15,11 +15,9 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAppParams } from '@/hooks/useAppParams';
 import { pushModal } from '@/modals';
-import { cn } from '@/utils/cn';
 import {
   Building2Icon,
   CheckIcon,
-  ChevronsUpDown,
   ChevronsUpDownIcon,
   PlusIcon,
 } from 'lucide-react';
@@ -41,22 +39,22 @@ export default function LayoutProjectSelector({
   align = 'start',
 }: LayoutProjectSelectorProps) {
   const router = useRouter();
-  const { organizationSlug, projectId } = useAppParams();
+  const { organizationId, projectId } = useAppParams();
   const pathname = usePathname() || '';
   const [open, setOpen] = useState(false);
 
   const changeProject = (newProjectId: string) => {
-    if (organizationSlug && projectId) {
+    if (organizationId && projectId) {
       const split = pathname
         .replace(
-          `/${organizationSlug}/${projectId}`,
-          `/${organizationSlug}/${newProjectId}`
+          `/${organizationId}/${projectId}`,
+          `/${organizationId}/${newProjectId}`
         )
         .split('/');
       // slicing here will remove everything after /{orgId}/{projectId}/dashboards [slice here] /xxx/xxx/xxx
       router.push(split.slice(0, 4).join('/'));
     } else {
-      router.push(`/${organizationSlug}/${newProjectId}`);
+      router.push(`/${organizationId}/${newProjectId}`);
     }
   };
 
@@ -121,7 +119,7 @@ export default function LayoutProjectSelector({
                   onClick={() => changeOrganization(organization.id)}
                 >
                   {organization.name}
-                  {organization.id === organizationSlug && (
+                  {organization.id === organizationId && (
                     <DropdownMenuShortcut>
                       <CheckIcon size={16} />
                     </DropdownMenuShortcut>

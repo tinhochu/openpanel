@@ -15,13 +15,13 @@ import MembersServer from './members';
 
 interface PageProps {
   params: {
-    organizationSlug: string;
+    organizationId: string;
   };
   searchParams: Record<string, string>;
 }
 
 export default async function Page({
-  params: { organizationSlug },
+  params: { organizationId },
   searchParams,
 }: PageProps) {
   const tab = parseAsStringEnum(['org', 'members', 'invites'])
@@ -30,7 +30,7 @@ export default async function Page({
   const session = auth();
   const organization = await db.organization.findUnique({
     where: {
-      id: organizationSlug,
+      id: organizationId,
       members: {
         some: {
           userId: session.userId,
@@ -81,12 +81,8 @@ export default async function Page({
       </PageTabs>
 
       {tab === 'org' && <EditOrganization organization={organization} />}
-      {tab === 'members' && (
-        <MembersServer organizationSlug={organizationSlug} />
-      )}
-      {tab === 'invites' && (
-        <InvitesServer organizationSlug={organizationSlug} />
-      )}
+      {tab === 'members' && <MembersServer organizationId={organizationId} />}
+      {tab === 'invites' && <InvitesServer organizationId={organizationId} />}
     </Padding>
   );
 }

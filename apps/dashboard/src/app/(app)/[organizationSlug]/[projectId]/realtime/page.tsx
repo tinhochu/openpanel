@@ -6,7 +6,6 @@ import {
 } from '@/components/fullscreen-toggle';
 import { LazyChart } from '@/components/report/chart/LazyChart';
 
-import PageLayout from '../page-layout';
 import RealtimeMap from './map';
 import RealtimeLiveEventsServer from './realtime-live-events';
 import { RealtimeLiveHistogram } from './realtime-live-histogram';
@@ -14,7 +13,6 @@ import RealtimeReloader from './realtime-reloader';
 
 type Props = {
   params: {
-    organizationSlug: string;
     projectId: string;
   };
 };

@@ -41,10 +41,10 @@ export async function getProjectWithClients(id: string) {
   return res;
 }
 
-export async function getProjectsByOrganizationSlug(organizationSlug: string) {
+export async function getProjectsByOrganizationSlug(organizationId: string) {
   return db.project.findMany({
     where: {
-      organizationSlug,
+      organizationId,
     },
     orderBy: {
       createdAt: 'desc',
@@ -52,7 +52,7 @@ export async function getProjectsByOrganizationSlug(organizationSlug: string) {
   });
 }
 
-export async function getCurrentProjects(organizationSlug: string) {
+export async function getCurrentProjects(organizationId: string) {
   const session = auth();
   if (!session.userId) {
     return [];
@@ -61,7 +61,7 @@ export async function getCurrentProjects(organizationSlug: string) {
   const [projects, members, access] = await Promise.all([
     db.project.findMany({
       where: {
-        organizationSlug,
+        organizationId,
       },
       orderBy: {
         eventsCount: 'desc',
@@ -70,13 +70,13 @@ export async function getCurrentProjects(organizationSlug: string) {
     db.member.findMany({
       where: {
         userId: session.userId,
-        organizationId: organizationSlug,
+        organizationId,
       },
     }),
     db.projectAccess.findMany({
       where: {
         userId: session.userId,
-        organizationId: organizationSlug,
+        organizationId,
       },
     }),
   ]);

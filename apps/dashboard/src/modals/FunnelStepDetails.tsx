@@ -35,7 +35,7 @@ export default function FunnelStepDetails(props: Props) {
   const [data] = api.chart.funnelStep.useSuspenseQuery(props);
   const pathname = usePathname();
   const prev = usePrevious(pathname);
-  const { organizationSlug, projectId } = useAppParams();
+  const { organizationId, projectId } = useAppParams();
   const [page, setPage] = useState(0);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function FunnelStepDetails(props: Props) {
               render(profile) {
                 return (
                   <Link
-                    href={`/${organizationSlug}/${projectId}/profiles/${profile.id}`}
+                    href={`/${organizationId}/${projectId}/profiles/${profile.id}`}
                     className="flex items-center gap-2 font-medium"
                   >
                     <ProfileAvatar size="sm" {...profile} />

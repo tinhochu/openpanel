@@ -10,10 +10,10 @@ export function ProjectLink({
   className?: string;
   title?: string;
 }) {
-  const { organizationSlug, projectId } = useAppParams();
+  const { organizationId, projectId } = useAppParams();
   if (typeof props.href === 'string') {
     return (
-      <Link {...props} href={`/${organizationSlug}/${projectId}/${props.href}`}>
+      <Link {...props} href={`/${organizationId}/${projectId}/${props.href}`}>
         {children}
       </Link>
     );

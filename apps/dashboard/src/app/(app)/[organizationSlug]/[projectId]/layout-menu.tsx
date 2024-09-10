@@ -83,37 +83,37 @@ export default function LayoutMenu({ dashboards }: LayoutMenuProps) {
       <LinkWithIcon
         icon={WallpaperIcon}
         label="Overview"
-        href={`/${params.organizationSlug}/${projectId}`}
+        href={`/${params.organizationId}/${projectId}`}
       />
       <LinkWithIcon
         icon={LayoutPanelTopIcon}
         label="Dashboards"
-        href={`/${params.organizationSlug}/${projectId}/dashboards`}
+        href={`/${params.organizationId}/${projectId}/dashboards`}
       />
       <LinkWithIcon
         icon={LayersIcon}
         label="Pages"
-        href={`/${params.organizationSlug}/${projectId}/pages`}
+        href={`/${params.organizationId}/${projectId}/pages`}
       />
       <LinkWithIcon
         icon={Globe2Icon}
         label="Realtime"
-        href={`/${params.organizationSlug}/${projectId}/realtime`}
+        href={`/${params.organizationId}/${projectId}/realtime`}
       />
       <LinkWithIcon
         icon={GanttChartIcon}
         label="Events"
-        href={`/${params.organizationSlug}/${projectId}/events`}
+        href={`/${params.organizationId}/${projectId}/events`}
       />
       <LinkWithIcon
         icon={UsersIcon}
         label="Profiles"
-        href={`/${params.organizationSlug}/${projectId}/profiles`}
+        href={`/${params.organizationId}/${projectId}/profiles`}
       />
       <LinkWithIcon
         icon={ScanEyeIcon}
         label="Retention"
-        href={`/${params.organizationSlug}/${projectId}/retention`}
+        href={`/${params.organizationId}/${projectId}/retention`}
       />
 
       <div className="mt-4">
@@ -134,7 +134,7 @@ export default function LayoutMenu({ dashboards }: LayoutMenuProps) {
               key={item.id}
               icon={LayoutPanelTopIcon}
               label={item.name}
-              href={`/${item.organizationSlug}/${item.projectId}/dashboards/${item.id}`}
+              href={`/${item.organizationId}/${item.projectId}/dashboards/${item.id}`}
             />
           ))}
         </div>

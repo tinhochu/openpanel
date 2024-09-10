@@ -42,7 +42,7 @@ export const organizationRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const access = await getOrganizationAccess({
         userId: ctx.session.userId,
-        organizationId: input.organizationSlug,
+        organizationId: input.organizationId,
       });
 
       if (!access) {
@@ -72,7 +72,7 @@ export const organizationRouter = createTRPCRouter({
       return db.member.create({
         data: {
           email,
-          organizationId: input.organizationSlug,
+          organizationId: input.organizationId,
           role: input.role,
           invitedById: ctx.session.userId,
           meta: {
@@ -166,14 +166,14 @@ export const organizationRouter = createTRPCRouter({
     .input(
       z.object({
         userId: z.string(),
-        organizationSlug: z.string(),
+        organizationId: z.string(),
         access: z.array(z.string()),
       })
     )
     .mutation(async ({ input, ctx }) => {
       const access = await getOrganizationAccess({
         userId: ctx.session.userId,
-        organizationId: input.organizationSlug,
+        organizationId: input.organizationId,
       });
 
       if (!access) {
@@ -184,14 +184,13 @@ export const organizationRouter = createTRPCRouter({
         db.projectAccess.deleteMany({
           where: {
             userId: input.userId,
-            organizationId: input.organizationSlug,
+            organizationId: input.organizationId,
           },
         }),
         db.projectAccess.createMany({
           data: input.access.map((projectId) => ({
             userId: input.userId,
-            organizationSlug: input.organizationSlug,
-            organizationId: input.organizationSlug,
+            organizationId: input.organizationId,
             projectId: projectId,
             level: 'read',
           })),

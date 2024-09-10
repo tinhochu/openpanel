@@ -10,16 +10,14 @@ import ListProjects from './list-projects';
 
 interface PageProps {
   params: {
-    organizationSlug: string;
+    organizationId: string;
   };
 }
 
-export default async function Page({
-  params: { organizationSlug },
-}: PageProps) {
+export default async function Page({ params: { organizationId } }: PageProps) {
   const [projects, clients] = await Promise.all([
-    getProjectsByOrganizationSlug(organizationSlug),
-    getClientsByOrganizationSlug(organizationSlug),
+    getProjectsByOrganizationSlug(organizationId),
+    getClientsByOrganizationSlug(organizationId),
   ]);
 
   return (

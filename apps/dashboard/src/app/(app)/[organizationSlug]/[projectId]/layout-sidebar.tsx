@@ -5,7 +5,6 @@ import { LogoSquare } from '@/components/logo';
 import SettingsToggle from '@/components/settings-toggle';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/utils/cn';
-import { Rotate as Hamburger } from 'hamburger-react';
 import { MenuIcon, XIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
@@ -21,7 +20,6 @@ import LayoutProjectSelector from './layout-project-selector';
 interface LayoutSidebarProps {
   organizations: IServiceOrganization[];
   dashboards: IServiceDashboards;
-  organizationSlug: string;
   projectId: string;
   projects: Awaited<ReturnType<typeof getProjectsByOrganizationSlug>>;
 }

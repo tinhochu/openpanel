@@ -89,7 +89,7 @@ function AccessCell({
         setAccess(newAccess);
         mutation.mutate({
           userId: row.original.user!.id,
-          organizationSlug: row.original.organizationId,
+          organizationId: row.original.organizationId,
           access: newAccess as string[],
         });
       }}

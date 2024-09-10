@@ -1,7 +1,7 @@
 import { useParams } from 'next/navigation';
 
 type AppParams = {
-  organizationSlug: string;
+  organizationId: string;
   projectId: string;
 };
 
@@ -9,7 +9,7 @@ export function useAppParams<T>() {
   const params = useParams<T & AppParams>();
   return {
     ...(params ?? {}),
-    organizationSlug: params?.organizationSlug,
+    organizationId: params?.organizationId,
     projectId: params?.projectId,
   } as T & AppParams;
 }
